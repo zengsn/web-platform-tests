@@ -16,7 +16,7 @@
         {
             var xhr = new XMLHttpRequest();
 
-            xhr.onreadystatechange = function()
+            xhr.onloadstart = function()
             {
                 test.step(function()
                 {
@@ -29,7 +29,7 @@
 
             xhr.upload.onabort = function(e)
             {
-                test.step(function() 
+                test.step(function()
                 {
                     assert_true(e instanceof ProgressEvent);
                     assert_equals(e.type, "abort");
