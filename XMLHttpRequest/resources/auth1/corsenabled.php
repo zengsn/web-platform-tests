@@ -1,15 +1,16 @@
 <?php
-  $session_user = isset($_SERVER["PHP_AUTH_USER"]) ? $_SERVER["PHP_AUTH_USER"] : null;
-  $session_pass = isset($_SERVER["PHP_AUTH_PW"]) ? $_SERVER["PHP_AUTH_PW"] : null;
-  $xhr_user = isset($_SERVER["HTTP_X_USER"]) ? $_SERVER["HTTP_X_USER"] : null;
-  $xhr_pass = isset($_SERVER["HTTP_X_PASS"]) ? $_SERVER["HTTP_X_PASS"] : null;
-  $file = "authentication-temp-cors-" . $xhr_user;
   // mark this resource as super-CORS-friendly..
   header('Access-Control-Allow-Origin: *');
   header('Access-Control-Allow-Credentials: true');
   header('Access-Control-Allow-Methods: GET');
   header('Access-Control-Allow-Headers: authorization, x-user, x-pass');
   header('Access-Control-Expose-Headers: x-challenge, xhr-user, ses-user');
+  if($_SERVER['REQUEST_METHOD']==='OPTIONS')exit;
+  $session_user = isset($_SERVER["PHP_AUTH_USER"]) ? $_SERVER["PHP_AUTH_USER"] : null;
+  $session_pass = isset($_SERVER["PHP_AUTH_PW"]) ? $_SERVER["PHP_AUTH_PW"] : null;
+  $xhr_user = isset($_SERVER["HTTP_X_USER"]) ? $_SERVER["HTTP_X_USER"] : null;
+  $xhr_pass = isset($_SERVER["HTTP_X_PASS"]) ? $_SERVER["HTTP_X_PASS"] : null;
+  $file = "authentication-temp-cors-" . $xhr_user;
   if(empty($session_user) && empty($session_pass)) {
     if(file_exists($file)) {
       unlink($file);
