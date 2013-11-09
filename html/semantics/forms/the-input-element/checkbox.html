@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Checkbox input element</title>
+    <link rel="author" title="Shaoning Zeng" href="mailto:shaoning.zeng@gmail.com">
+    <link rel="help" href="http://www.w3.org/TR/html5/forms.html#checkbox-state-(type=checkbox)">
+    <script src="/resources/testharness.js"></script>
+    <script src="/resources/testharnessreport.js"></script>
+  </head>
+
+  <body>
+    <h1>Checkbox input element</h1>
+    <div style="display: none">
+
+    <input id="checkbox_unchecked" type="checkbox">
+    <input id="checkbox_checked1" type="checkbox" checked>
+    <input id="checkbox_checked2" type="checkbox" checked="">
+    <input id="checkbox_checked3" type="checkbox" checked="checked">
+    <input id="checkbox_checked4" type="checkbox" checked="unchecked">
+
+    </div>
+    <div id="log"></div>
+  <script type="text/javascript">
+
+    var element = document.getElementById("checkbox_unchecked");
+    test(
+      function() {
+        assert_equals(element.type, "checkbox");
+        assert_equals(element.checked, false);
+        assert_equals(document.getElementById("checkbox_checked1").checked, true);
+        assert_equals(document.getElementById("checkbox_checked2").checked, true);
+        assert_equals(document.getElementById("checkbox_checked3").checked, true);
+        assert_equals(document.getElementById("checkbox_checked4").checked, true);
+      }, "The input element represents a two-state control that represents the element's checkedness state.");
+
+  </script>
+  </body>
+</html>
